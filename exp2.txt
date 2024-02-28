@@ -1,0 +1,149 @@
+Exp 2
+
+//table person
+
+mysql> insert into person values(101,"Anu","banglore",2002,0987654321);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into person values(102,"Banu","goa",2000,1234567890);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into person values(103,"sanu","delhi",2001,6543217890);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into person values(104,"finu","mumbai",2003,2143658709);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into person values(105,"janu","chennai",2005,8765432190);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from person;
++------+------+----------+------+------------+
+| ssn  | name | city     | dob  | adhar_no   |
++------+------+----------+------+------------+
+|  101 | Anu  | banglore | 2002 |  987654321 |
+|  102 | Banu | goa      | 2000 | 1234567890 |
+|  103 | sanu | delhi    | 2001 | 6543217890 |
+|  104 | finu | mumbai   | 2003 | 2143658709 |
+|  105 | janu | chennai  | 2005 | 8765432190 |
++------+------+----------+------+------------+
+5 rows in set (0.00 sec)
+
+
+//table student
+
+mysql> insert into student values(01,"zusa",10,"abc house","F");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(02,"suku",20,"pqr house","M");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(03,"kukku",5,"lmn house","F");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(04,"akku",2,"ghi house","M");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(05,"nichu",22,"xyz house","M");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++---------+-------+------+-----------+--------+
+| roll_no | name  | age  | address   | gender |
++---------+-------+------+-----------+--------+
+|       1 | zusa  |   10 | abc house | F      |
+|       2 | suku  |   20 | pqr house | M      |
+|       3 | kukku |    5 | lmn house | F      |
+|       4 | akku  |    2 | ghi house | M      |
+|       5 | nichu |   22 | xyz house | M      |
++---------+-------+------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+//table customer
+
+mysql> insert into customer values(10001,"john","grand villa","calicut",9876543212);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(10002,"smith","grace villa","ekm",3456789012);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(10003,"susan","zeno villa","tvm",9765438976);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(10004,"adam","white villa","pkd",9543678965);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into customer values(10005,"blessy","grey house","wyd",8976543214);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++-------+--------+-------------+---------+------------+
+| id    | name   | address     | city    | ph_no      |
++-------+--------+-------------+---------+------------+
+| 10001 | john   | grand villa | calicut | 9876543212 |
+| 10002 | smith  | grace villa | ekm     | 3456789012 |
+| 10003 | susan  | zeno villa  | tvm     | 9765438976 |
+| 10004 | adam   | white villa | pkd     | 9543678965 |
+| 10005 | blessy | grey house  | wyd     | 8976543214 |
++-------+--------+-------------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from customer where id=10003;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer(id,name,address,city) values(10003,"susan","zeno villa","tvm");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++-------+--------+-------------+---------+------------+
+| id    | name   | address     | city    | ph_no      |
++-------+--------+-------------+---------+------------+
+| 10001 | john   | grand villa | calicut | 9876543212 |
+| 10002 | smith  | grace villa | ekm     | 3456789012 |
+| 10003 | susan  | zeno villa  | tvm     |       NULL |
+| 10004 | adam   | white villa | pkd     | 9543678965 |
+| 10005 | blessy | grey house  | wyd     | 8976543214 |
++-------+--------+-------------+---------+------------+
+5 rows in set (0.00 sec)
+
+//table product
+
+mysql> desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | int         | NO   | PRI | NULL    |       |
+| pname | varchar(25) | YES  |     | NULL    |       |
+| price | int         | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into product values(301,"pen",10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(401,"pencil",50);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(501,"soap",70);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(601,"book",100);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(701,"bucket",150);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 301 | pen    |    10 |
+| 401 | pencil |    50 |
+| 501 | soap   |    70 |
+| 601 | book   |   100 |
+| 701 | bucket |   150 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+
