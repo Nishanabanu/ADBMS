@@ -79,3 +79,5 @@ show tables;
 
 
 drop table student1;
+
+//VERIFIED
