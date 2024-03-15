@@ -1,0 +1,204 @@
+
+ a)TCL COMMANDS
+______________________________________________________
+
+1.COMMIT
+-------------
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from person;
++------+------+----------+------+------------+
+| ssn  | name | city     | dob  | adhar_no   |
++------+------+----------+------+------------+
+|  101 | Anu  | banglore | 2002 |  987654321 |
+|  102 | Banu | goa      | 2000 | 1234567890 |
+|  103 | sanu | delhi    | 2001 | 6543217890 |
+|  104 | finu | mumbai   | 2003 | 2143658709 |
+|  105 | janu | chennai  | 2005 | 8765432190 |
++------+------+----------+------+------------+
+
+
+mysql> insert into person values(106,"manu","manglore",2003,7654321908);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from person;
++------+------+----------+------+------------+
+| ssn  | name | city     | dob  | adhar_no   |
++------+------+----------+------+------------+
+|  101 | Anu  | banglore | 2002 |  987654321 |
+|  102 | Banu | goa      | 2000 | 1234567890 |
+|  103 | sanu | delhi    | 2001 | 6543217890 |
+|  104 | finu | mumbai   | 2003 | 2143658709 |
+|  105 | janu | chennai  | 2005 | 8765432190 |
+|  106 | manu | manglore | 2003 | 7654321908 |
++------+------+----------+------+------------+
+
+
+2.ROLLBACK
+--------------
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from person where name="manu";
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from person;
++------+------+----------+------+------------+
+| ssn  | name | city     | dob  | adhar_no   |
++------+------+----------+------+------------+
+|  101 | Anu  | banglore | 2002 |  987654321 |
+|  102 | Banu | goa      | 2000 | 1234567890 |
+|  103 | sanu | delhi    | 2001 | 6543217890 |
+|  104 | finu | mumbai   | 2003 | 2143658709 |
+|  105 | janu | chennai  | 2005 | 8765432190 |
++------+------+----------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from person;
++------+------+----------+------+------------+
+| ssn  | name | city     | dob  | adhar_no   |
++------+------+----------+------+------------+
+|  101 | Anu  | banglore | 2002 |  987654321 |
+|  102 | Banu | goa      | 2000 | 1234567890 |
+|  103 | sanu | delhi    | 2001 | 6543217890 |
+|  104 | finu | mumbai   | 2003 | 2143658709 |
+|  105 | janu | chennai  | 2005 | 8765432190 |
+|  106 | manu | manglore | 2003 | 7654321908 |
++------+------+----------+------+------------+
+
+
+3.SAVEPOINT
+--------------
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into person values(107,"sinu","goa",2000,32569874523);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into person values(108,"junu","goa",2020,98759874523);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into person values(109,"tinu","goa",2003,12349874523);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from person;
++------+------+----------+------+-------------+
+| ssn  | name | city     | dob  | adhar_no    |
++------+------+----------+------+-------------+
+|  101 | Anu  | banglore | 2002 |   987654321 |
+|  102 | Banu | goa      | 2000 |  1234567890 |
+|  103 | sanu | delhi    | 2001 |  6543217890 |
+|  104 | finu | mumbai   | 2003 |  2143658709 |
+|  105 | janu | chennai  | 2005 |  8765432190 |
+|  106 | manu | manglore | 2003 |  7654321908 |
+|  107 | sinu | goa      | 2000 | 32569874523 |
+|  108 | junu | goa      | 2020 | 98759874523 |
+|  109 | tinu | goa      | 2003 | 12349874523 |
++------+------+----------+------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> rollback to s2;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from person;
++------+------+----------+------+-------------+
+| ssn  | name | city     | dob  | adhar_no    |
++------+------+----------+------+-------------+
+|  101 | Anu  | banglore | 2002 |   987654321 |
+|  102 | Banu | goa      | 2000 |  1234567890 |
+|  103 | sanu | delhi    | 2001 |  6543217890 |
+|  104 | finu | mumbai   | 2003 |  2143658709 |
+|  105 | janu | chennai  | 2005 |  8765432190 |
+|  106 | manu | manglore | 2003 |  7654321908 |
+|  107 | sinu | goa      | 2000 | 32569874523 |
+|  108 | junu | goa      | 2020 | 98759874523 |
++------+------+----------+------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+***************************************************************
+
+b)DCL COMMANDS
+___________________________________________________________
+
+1.GRANT
+------------
+
+mysql> grant insert,select on invoice.customer to banu@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for banu@'localhost';
++--------------------------------------------------------------------+
+| Grants for banu@localhost                                          |
++--------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `banu`@`localhost`                           |
+| GRANT SELECT, INSERT ON `invoice`.`customer` TO `banu`@`localhost` |
++--------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+mysql> create user user1@'localhost' identified by '123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create user user2@'localhost' identified by '456';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> grant insert,select on invoice.customer to user1@'localhost'; 
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for user1@'localhost';
++---------------------------------------------------------------------+
+| Grants for user1@localhost                                          |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `user1`@`localhost`                           |
+| GRANT SELECT, INSERT ON `invoice`.`customer` TO `user1`@`localhost` |
++---------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> grant update,delete on invoice.* to user2@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for user2@'localhost';
++------------------------------------------------------------+
+| Grants for user2@localhost                                 |
++------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `user2`@`localhost`                  |
+| GRANT UPDATE, DELETE ON `invoice`.* TO `user2`@`localhost` |
++------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+2.REVOKE
+--------------------------
+
+mysql> revoke delete on invoice.* from user2@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for user2@'localhost';
++----------------------------------------------------+
+| Grants for user2@localhost                         |
++----------------------------------------------------+
+| GRANT USAGE ON *.* TO `user2`@`localhost`          |
+| GRANT UPDATE ON `invoice`.* TO `user2`@`localhost` |
++----------------------------------------------------+
+2 rows in set (0.00 sec)
+
