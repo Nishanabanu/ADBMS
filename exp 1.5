@@ -1,0 +1,105 @@
+1.5 SUB QUERY
+----------------------
+1)
+
+mysql> select * from customer;
++-------+--------+-------------+--------+------------+
+| id    | name   | address     | city   | ph_no      |
++-------+--------+-------------+--------+------------+
+| 10004 | adam   | blue villa  | idukki | 9895521927 |
+| 10005 | blessy | grey house  | wyd    | 8976543214 |
+| 10006 | Bob    | white house | ekm    | 9876543234 |
+| 10007 | Banu   | blue house  | tvm    | 9876543234 |
++-------+--------+-------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |   10001 | 2021-11-26 |
+|    102 |   10002 | 2021-11-26 |
+|    103 |   10003 | 2022-02-11 |
+|    104 |   10004 | 2023-01-25 |
+|    105 |   10004 | 2021-08-10 |
+|    106 |   10005 | 2021-02-06 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select name from customer where id in(select cust_id from invoice_master
+where inv_date=20230125);
++------+
+| name |
++------+
+| adam |
++------+
+1 row in set (0.00 sec)
+
+2)
+
+mysql> select * from product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 301 | pen    |    10 |
+| 401 | pencil |    51 |
+| 501 | soap   |    71 |
+| 601 | book   |   102 |
+| 701 | bucket |   224 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    103 |  601 |       15 |
+|    103 |  701 |       20 |
+|    104 |  701 |       25 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select pname,price from product where pid in(select pid from invoice_item);
++--------+-------+
+| pname  | price |
++--------+-------+
+| book   |   102 |
+| bucket |   224 |
++--------+-------+
+2 rows in set (0.00 sec)
+
+
+3)
+
+mysql> select * from product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 301 | pen    |    10 |
+| 401 | pencil |    51 |
+| 501 | soap   |    71 |
+| 601 | book   |   102 |
+| 701 | bucket |   224 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    103 |  601 |       15 |
+|    103 |  701 |       20 |
+|    104 |  701 |       25 |
++--------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select pname from product where pid in(select pid from invoice_item where quantity>3);
++--------+
+| pname  |
++--------+
+| book   |
+| bucket |
++--------+
+2 rows in set (0.00 sec)
+
+
