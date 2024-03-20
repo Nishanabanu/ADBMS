@@ -1,0 +1,146 @@
+1.LIST ALL CUSTOMER DETAILS
+-------------------------------------------------
+mysql> select * from customer;
++-------+--------+------------+--------+------------+
+| id    | name   | address    | city   | ph_no      |
++-------+--------+------------+--------+------------+
+| 10004 | adam   | blue villa | idukki | 9895521927 |
+| 10005 | blessy | grey house | wyd    | 8976543214 |
++-------+--------+------------+--------+------------+
+2 rows in set (0.00 sec)
+
+
+2.LIST pname,price OF ALL PRODUCTS
+-------------------------------------
+
+mysql> select pname,price from product;
++--------+-------+
+| pname  | price |
++--------+-------+
+| pen    |    10 |
+| pencil |    51 |
+| soap   |    71 |
+| book   |   102 |
+| bucket |   224 |
++--------+-------+
+5 rows in set (0.00 sec)
+
+3.LIST ALL INVOICE ITEMS.AVOID DUPLICATES
+-----------------------------------------------
+
+mysql> select pid from invoice_item;
++------+
+| pid  |
++------+
+|  601 |
+|  701 |
+|  701 |
++------+
+3 rows in set (0.00 sec)
+
+mysql> select distinct pid from invoice_item;
++------+
+| pid  |
++------+
+|  601 |
+|  701 |
++------+
+2 rows in set (0.00 sec)
+
+
+4.LIST PRODUCT PRICE BETWEEN 50rs and 150rs
+-------------------------------------------------
+
+mysql> select * from product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 301 | pen    |    10 |
+| 401 | pencil |    51 |
+| 501 | soap   |    71 |
+| 601 | book   |   102 |
+| 701 | bucket |   224 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product where price between 50 and 150;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 401 | pencil |    51 |
+| 501 | soap   |    71 |
+| 601 | book   |   102 |
++-----+--------+-------+
+
+5.LIST THE CUSTOMER DETAILS WHO LIVES IN EKM,TVM
+-------------------------------------------------------
+
+mysql> select * from customer;
++-------+--------+-------------+--------+------------+
+| id    | name   | address     | city   | ph_no      |
++-------+--------+-------------+--------+------------+
+| 10004 | adam   | blue villa  | idukki | 9895521927 |
+| 10005 | blessy | grey house  | wyd    | 8976543214 |
+| 10006 | Bob    | white house | ekm    | 9876543234 |
+| 10007 | Banu   | blue house  | tvm    | 9876543234 |
++-------+--------+-------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where city in("ekm","tvm");
++-------+------+-------------+------+------------+
+| id    | name | address     | city | ph_no      |
++-------+------+-------------+------+------------+
+| 10006 | Bob  | white house | ekm  | 9876543234 |
+| 10007 | Banu | blue house  | tvm  | 9876543234 |
++-------+------+-------------+------+------------+
+2 rows in set (0.00 sec)
+
+
+6.LIST THE INVOICE DETAILS FROM FIRST JANUARY 2021 TO 31 MARCH 2021
+------------------------------------------------------------------------
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |   10001 | 2021-11-26 |
+|    102 |   10002 | 2021-11-26 |
+|    103 |   10003 | 2022-02-11 |
+|    104 |   10004 | 2023-01-25 |
+|    105 |   10004 | 2021-08-10 |
+|    106 |   10005 | 2021-02-06 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from invoice_master where inv_date between 20210101 and 20210331;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    106 |   10005 | 2021-02-06 |
++--------+---------+------------+
+
+7.LIST THE CUSTOMER DETAILS WHO NOT LIVE IN TVM
+--------------------------------------------------------------
+
+mysql> select * from customer;
++-------+--------+-------------+--------+------------+
+| id    | name   | address     | city   | ph_no      |
++-------+--------+-------------+--------+------------+
+| 10004 | adam   | blue villa  | idukki | 9895521927 |
+| 10005 | blessy | grey house  | wyd    | 8976543214 |
+| 10006 | Bob    | white house | ekm    | 9876543234 |
+| 10007 | Banu   | blue house  | tvm    | 9876543234 |
++-------+--------+-------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer where city not in("tvm");
++-------+--------+-------------+--------+------------+
+| id    | name   | address     | city   | ph_no      |
++-------+--------+-------------+--------+------------+
+| 10004 | adam   | blue villa  | idukki | 9895521927 |
+| 10005 | blessy | grey house  | wyd    | 8976543214 |
+| 10006 | Bob    | white house | ekm    | 9876543234 |
++-------+--------+-------------+--------+------------+
+3 rows in set (0.00 sec)
+
+
