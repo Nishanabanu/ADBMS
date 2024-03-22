@@ -1,0 +1,91 @@
+EXP 1.6
+
+1)LIST PRODUCT NAME,PRICE EXCEPT SOAP ON PRICE ORDER
+-----------------------------------------------------------
+
+mysql> select * from product;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 301 | pen    |    10 |
+| 401 | pencil |    51 |
+| 501 | soap   |    71 |
+| 601 | book   |   102 |
+| 701 | bucket |   224 |
++-----+--------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select pname,price from product where pname!='soap' order by price;
++--------+-------+
+| pname  | price |
++--------+-------+
+| pen    |    10 |
+| pencil |    51 |
+| book   |   102 |
+| bucket |   224 |
++--------+-------+
+4 rows in set (0.00 sec)
+
+2)FIND MIN,MAX,AVG PRICE OF PRODUCTS
+----------------------------------------------
+
+mysql> select min(price),max(price),avg(price) from product;
++------------+------------+------------+
+| min(price) | max(price) | avg(price) |
++------------+------------+------------+
+|         10 |        224 |    91.6000 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+
+3)FIND NUMBER OF CUSTOMERS IN EACH CITY
+-----------------------------------------------
+mysql> select * from customer;
++-------+--------+-------------+--------+------------+
+| id    | name   | address     | city   | ph_no      |
++-------+--------+-------------+--------+------------+
+| 10004 | adam   | blue villa  | idukki | 9895521927 |
+| 10005 | blessy | grey house  | wyd    | 8976543214 |
+| 10006 | Bob    | white house | ekm    | 9876543234 |
+| 10007 | Banu   | blue house  | tvm    | 9876543234 |
++-------+--------+-------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select city,count(*) from customer group by city;
++--------+----------+
+| city   | count(*) |
++--------+----------+
+| idukki |        1 |
+| wyd    |        1 |
+| ekm    |        1 |
+| tvm    |        1 |
++--------+----------+
+4 rows in set (0.00 sec)
+
+
+4)FIND NUMBER OF CUSTOMERS IN EACH CITY,ONLY INCLUDE CITY WITH MORE THAN 2 CUSTOMERS
+----------------------------------------------------------------------------------------
+
+
+mysql> select * from customer;
++-------+--------+--------------+--------+-------------+
+| id    | name   | address      | city   | ph_no       |
++-------+--------+--------------+--------+-------------+
+| 10002 | zusa   | pink house   | ekm    |  9876543234 |
+| 10003 | suku   | yellow house | ekm    | 98765432123 |
+| 10004 | adam   | blue villa   | idukki |  9895521927 |
+| 10005 | blessy | grey house   | wyd    |  8976543214 |
+| 10006 | Bob    | white house  | ekm    |  9876543234 |
+| 10007 | Banu   | blue house   | tvm    |  9876543234 |
++-------+--------+--------------+--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select city,count(*) from customer group by city having count(city)>2;
++------+----------+
+| city | count(*) |
++------+----------+
+| ekm  |        3 |
++------+----------+
+1 row in set (0.00 sec)
+
+
