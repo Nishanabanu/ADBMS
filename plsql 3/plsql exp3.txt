@@ -1,0 +1,158 @@
+EXP 3
+
+NoSQL – CRUD
+
+1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents.
+----------------------------------------------------------------------------------------------------------------------------
+
+test> use invoice;
+switched to db invoice
+invoice> db.createCollection("customer")
+{ ok: 1 }
+invoice> db.createCollection("product")
+{ ok: 1 }
+invoice> db.customer.insertOne({"id":"10001","name":"Banu"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66138914a49ac42b3def634c')
+}
+invoice> db.customer.insertMany([{"id":"10002","name":"Banu","age":"21"},{"id":"10003","name":"Finu","age":"21","salary":"10000"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66138aa0a49ac42b3def634d'),
+    '1': ObjectId('66138aa0a49ac42b3def634e')
+  }
+}
+invoice> db.customer.insertMany([{"id":"10004","name":"Anu","age":"20"},{"id":"10005","name":"Sinu","age":"25","salary":"20000"}]
+... )
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66138bbaa49ac42b3def634f'),
+    '1': ObjectId('66138bbaa49ac42b3def6350')
+  }
+}
+invoice> db.customer.insertMany([{ "id": "10006", "name": "Abhi", "age": "24","city":"calicut" }, { "id": "10007", "name": "Janu", "age": "25","city":"ekm", "salary": "20000" }] )
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66138ca7a49ac42b3def6351'),
+    '1': ObjectId('66138ca7a49ac42b3def6352')
+  }
+}
+invoice> db.customer.insertMany([{ "id": "10008", "name": "Kukku", "age": "55","city":"calicut" }, { "id": "10009", "name": "shanu", "age": "60","city":"tvm", "salary": "20000" }] )
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66138db6a49ac42b3def6353'),
+    '1': ObjectId('66138db6a49ac42b3def6354')
+
+
+2)Write a MongoDB query to find all documents from the collection CUSTOMER
+-------------------------------------------------------------------------------
+invoice> db.customer.find()
+[
+  {
+    _id: ObjectId('66138914a49ac42b3def634c'),
+    id: '10001',
+    name: 'Banu'
+  },
+  {
+    _id: ObjectId('66138aa0a49ac42b3def634d'),
+    id: '10002',
+    name: 'Banu',
+    age: '21'
+  },
+  {
+    _id: ObjectId('66138aa0a49ac42b3def634e'),
+    id: '10003',
+    name: 'Finu',
+    age: '21',
+    salary: '10000'
+  },
+  {
+    _id: ObjectId('66138bbaa49ac42b3def634f'),
+    id: '10004',
+    name: 'Anu',
+    age: '20'
+  },
+  {
+    _id: ObjectId('66138bbaa49ac42b3def6350'),
+    id: '10005',
+    name: 'Sinu',
+    age: '25',
+    salary: '20000'
+  },
+  {
+    _id: ObjectId('66138ca7a49ac42b3def6351'),
+    id: '10006',
+    name: 'Abhi',
+    age: '24',
+    city: 'calicut'
+  },
+  {
+    _id: ObjectId('66138ca7a49ac42b3def6352'),
+    id: '10007',
+    name: 'Janu',
+    age: '25',
+    city: 'ekm',
+    salary: '20000'
+  },
+  {
+    _id: ObjectId('66138db6a49ac42b3def6353'),
+    id: '10008',
+    name: 'Kukku',
+    age: '55',
+    city: 'calicut'
+  },
+  {
+    _id: ObjectId('66138db6a49ac42b3def6354'),
+    id: '10009',
+    name: 'shanu',
+    age: '60',
+    city: 'tvm',
+    salary: '20000'
+  }
+]
+
+
+3)Write a MongoDB query to update the city in the collection CUSTOMER.
+----------------------------------------------------------------------
+
+invoice> db.customer.updateOne({"city":"calicut"},{$set:{"city":"tvm"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+4)Write a MongoDB query to delete the first matched document whose city is “Calicut”
+------------------------------------------------------------------------------------
+
+invoice> db.customer.deleteOne({"city":"calicut"})
+{ acknowledged: true, deletedCount: 1 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
