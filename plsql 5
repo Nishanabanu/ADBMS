@@ -1,0 +1,89 @@
+Exp 5: AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
+
+----------------------------------------------------
+
+1) Write a MongoDB query to sort customer details in ascending order of their name.
+
+
+invoice> db.customer.find().sort({name:1})
+[
+  {
+    _id: ObjectId('66138ca7a49ac42b3def6351'),
+    id: '10006',
+    name: 'Abhi',
+    age: '24',
+    city: 'tvm'
+  },
+  {
+    _id: ObjectId('66138bbaa49ac42b3def634f'),
+    id: '10004',
+    name: 'Anu',
+    age: '20'
+  },
+  {
+    _id: ObjectId('66138914a49ac42b3def634c'),
+    id: '10001',
+    name: 'Banu'
+  },
+  {
+    _id: ObjectId('66138aa0a49ac42b3def634d'),
+    id: '10002',
+    name: 'Banu',
+    age: '21'
+  },
+  {
+    _id: ObjectId('66138aa0a49ac42b3def634e'),
+    id: '10003',
+    name: 'Finu',
+    age: '21',
+    salary: '10000'
+  },
+  {
+    _id: ObjectId('66138ca7a49ac42b3def6352'),
+    id: '10007',
+    name: 'Janu',
+    age: '25',
+    city: 'ekm',
+    salary: '20000'
+  },
+  {
+    _id: ObjectId('66138bbaa49ac42b3def6350'),
+    id: '10005',
+    name: 'Sinu',
+    age: '25',
+    salary: '20000'
+  },
+  {
+    _id: ObjectId('66138db6a49ac42b3def6354'),
+    id: '10009',
+    name: 'shanu',
+    age: '60',
+    city: 'tvm',
+    salary: '20000'
+  }
+]
+
+
+2)Write a MongoDB query to count number of customers in each city.
+------------------------------------------------------------------
+
+invoice> db.customer.aggregate([{$group:{_id: "$city",total:{$sum:1}}}])
+[
+  { _id: 'tvm', total: 2 },
+  { _id: 'ekm', total: 1 },
+  { _id: null, total: 5 }
+]
+
+
+3)Write a MongoDB query to find minimum and maximum age in each city.
+-----------------------------------------------------------------------
+
+invoice> db.customer.aggregate([{$group:{_id: "$city",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
+
+[
+  { _id: null, max_age: '25', min_age: '20' },
+  { _id: 'tvm', max_age: '60', min_age: '24' },
+  { _id: 'ekm', max_age: '25', min_age: '25' }
+]
+
+
