@@ -28,7 +28,7 @@ local     72.00 KiB
 
 
 2)Write a MongoDB query to create the backup for the dummy database.
------------------------------------------------------------------------
+----------------------------------------------------------------------
 
 (base) ksb@ksb-H410M-H-V2:~$ mongodump --db dummy
 
